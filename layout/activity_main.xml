@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+	<SlidingDrawer 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:id="@+id/drawer"
+	    
+	    android:handle="@+id/handle"
+	    android:content="@+id/content" 
+	    >
+	    
+	    <ImageView 
+	        android:id="@+id/handle"
+	        android:background="@drawable/app"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        />
+	    
+	    
+	    <GridView 
+	        android:id="@+id/content"
+	        android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:background="@android:color/black"
+	        
+	        
+	        ></GridView>
+	    
+	</SlidingDrawer>
+</RelativeLayout>
