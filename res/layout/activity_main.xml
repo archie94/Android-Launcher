@@ -26,7 +26,12 @@
 	        android:layout_width="match_parent"
 	    	android:layout_height="match_parent"
 	    	android:background="@android:color/black"
-	        
+	        android:columnWidth="90dp"
+	        android:numColumns="auto_fit"
+	        android:verticalSpacing="50dp"
+	        android:horizontalSpacing="50dp"
+	        android:stretchMode="columnWidth"
+	        android:gravity="center"
 	        
 	        ></GridView>
 	    
