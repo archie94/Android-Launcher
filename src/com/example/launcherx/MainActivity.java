@@ -33,7 +33,7 @@ public class MainActivity extends Activity
         set_packs();
         drawerObj=new DrawerAdapter(this,packs);
         drawGrid.setAdapter(drawerObj);
-        
+        drawGrid.setOnItemClickListener(new DrawerClickListener(this,packs,pm));
     }
 
     public void set_packs()
