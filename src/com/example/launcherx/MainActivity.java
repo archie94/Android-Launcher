@@ -3,7 +3,10 @@ package com.example.launcherx;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
@@ -31,9 +34,16 @@ public class MainActivity extends Activity
         drawGrid=(GridView)findViewById(R.id.content);
         pm=getPackageManager();//retrieve information /*Return PackageManager instance to find global package information.*/
         set_packs();
-        drawerObj=new DrawerAdapter(this,packs);
-        drawGrid.setAdapter(drawerObj);
-        drawGrid.setOnItemClickListener(new DrawerClickListener(this,packs,pm));
+        
+        
+        //Intent filter is needed to add attributes to the actions we want to detect
+        IntentFilter filter=new IntentFilter();
+        filter.addAction(Intent.ACTION_PACKAGE_ADDED);//since we want our app drawer to refresh if a new app is added 
+        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);//if app is removed
+        filter.addAction(Intent.ACTION_PACKAGE_CHANGED);//if app is modified 
+        filter.addDataScheme("package");//need to know why this is required 
+        registerReceiver(new PacReceiver(), filter);
+        
     }
 
     public void set_packs()
@@ -51,7 +61,25 @@ public class MainActivity extends Activity
     		
     	}
     	new SortApps().sort(packs);
+    	
+    	
+    	drawerObj=new DrawerAdapter(this,packs);
+        drawGrid.setAdapter(drawerObj);
+        drawGrid.setOnItemClickListener(new DrawerClickListener(this,packs,pm));
     }
+    
+    
+    //detect if an application is added or deleted 
+    public class PacReceiver extends BroadcastReceiver
+    {
 
+		@Override
+		public void onReceive(Context arg0, Intent arg1) 
+		{
+			// TODO Auto-generated method stub
+			set_packs();//when onReceive() is called we ask for sorting which refreshes our app drawer 
+		}
+    	
+    }
 
 }
