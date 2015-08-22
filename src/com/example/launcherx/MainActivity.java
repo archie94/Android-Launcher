@@ -12,11 +12,16 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
+import android.widget.SlidingDrawer;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends Activity 
 {
 	GridView drawGrid;
 	DrawerAdapter drawerObj;
+	SlidingDrawer slidingDrawer;
+	RelativeLayout homeView;
 	class Pack
 	{
 		Drawable icon;
@@ -26,12 +31,16 @@ public class MainActivity extends Activity
 	PackageManager pm;/*PackageManager class is used for retrieving informations related to the application 
 	packages currently installed on the device*/
 	
+	static boolean appLaunchable=true;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         drawGrid=(GridView)findViewById(R.id.content);
+        slidingDrawer=(SlidingDrawer)findViewById(R.id.drawer);
+        homeView=(RelativeLayout)findViewById(R.id.home_view);
         pm=getPackageManager();//retrieve information /*Return PackageManager instance to find global package information.*/
         set_packs();
         
@@ -66,6 +75,7 @@ public class MainActivity extends Activity
     	drawerObj=new DrawerAdapter(this,packs);
         drawGrid.setAdapter(drawerObj);
         drawGrid.setOnItemClickListener(new DrawerClickListener(this,packs,pm));
+        drawGrid.setOnItemLongClickListener(new DrawerLongClickListener(this,slidingDrawer,homeView));
     }
     
     
