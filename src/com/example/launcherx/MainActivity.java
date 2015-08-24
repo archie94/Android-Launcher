@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
+import android.widget.SlidingDrawer.OnDrawerOpenListener;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends Activity 
@@ -44,6 +45,19 @@ public class MainActivity extends Activity
         pm=getPackageManager();//retrieve information /*Return PackageManager instance to find global package information.*/
         set_packs();
         
+        //when we open drawer we want to launch app 
+        slidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener()
+        {
+
+			@Override
+			public void onDrawerOpened() 
+			{
+				// TODO Auto-generated method stub
+				appLaunchable=true;
+				
+			}
+        	
+        });
         
         //Intent filter is needed to add attributes to the actions we want to detect
         IntentFilter filter=new IntentFilter();

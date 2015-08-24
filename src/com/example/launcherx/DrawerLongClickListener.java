@@ -15,6 +15,10 @@ import android.widget.TextView;
 @SuppressWarnings("deprecation")
 public class DrawerLongClickListener implements OnItemLongClickListener 
 {
+	/* This class adds the functionality that on selecting the app for long in application
+	 * drawer the app will be put in the home screen*/
+	
+	
 	SlidingDrawer drawerForAdapter;
 	RelativeLayout homeViewForAdapter;
 	Context mContext;
@@ -41,10 +45,12 @@ public class DrawerLongClickListener implements OnItemLongClickListener
 		LinearLayout ll=(LinearLayout)li.inflate(R.layout.item, null);
 		
 		
-		((ImageView)ll.findViewById(R.id.icon_image)).setImageDrawable( ((ImageView)item.findViewById(R.id.icon_image)).getDrawable()  );
-		((TextView)ll.findViewById(R.id.icon_text)).setText(   ((TextView)item.findViewById(R.id.icon_text)).getText()   );
+		((ImageView)ll.findViewById(R.id.icon_image)).setImageDrawable(((ImageView)item.findViewById(R.id.icon_image)).getDrawable());
+		((TextView)ll.findViewById(R.id.icon_text)).setText(((TextView)item.findViewById(R.id.icon_text)).getText());
 		
-		homeViewForAdapter.addView(ll, lp);
+		ll.setOnTouchListener(new AppTouchListener(item.getWidth()));
+		
+		homeViewForAdapter.addView(ll,lp);
 		drawerForAdapter.animateClose();
 		drawerForAdapter.bringToFront();//so that when we click our app drawer the app we put on home screen goes to background
 		

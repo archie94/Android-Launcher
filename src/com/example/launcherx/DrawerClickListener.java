@@ -9,6 +9,10 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class DrawerClickListener implements OnItemClickListener
 {
+	/*
+	 * This class opens up an application when it is clicked in 
+	 * the application drawer 
+	 */
 	Context cDCL;
 	MainActivity.Pack packDCL[];
 	PackageManager pmDCL;
