@@ -26,7 +26,7 @@ public class MainActivity extends Activity
 	class Pack
 	{
 		Drawable icon;
-		String name,label;
+		String name,label,packageName;
 	}
 	Pack packs[];
 	PackageManager pm;/*PackageManager class is used for retrieving informations related to the application 
@@ -80,7 +80,8 @@ public class MainActivity extends Activity
     		packs[i]=new Pack();
     		packs[i].icon=packsList.get(i).loadIcon(pm);
     		packs[i].label=packsList.get(i).loadLabel(pm).toString();
-    		packs[i].name=packsList.get(i).activityInfo.packageName;
+    		packs[i].name=packsList.get(i).activityInfo.name;
+    		packs[i].packageName=packsList.get(i).activityInfo.packageName;
     		
     	}
     	new SortApps().sort(packs);
@@ -89,7 +90,7 @@ public class MainActivity extends Activity
     	drawerObj=new DrawerAdapter(this,packs);
         drawGrid.setAdapter(drawerObj);
         drawGrid.setOnItemClickListener(new DrawerClickListener(this,packs,pm));
-        drawGrid.setOnItemLongClickListener(new DrawerLongClickListener(this,slidingDrawer,homeView));
+        drawGrid.setOnItemLongClickListener(new DrawerLongClickListener(this,slidingDrawer,homeView,packs));
     }
     
     

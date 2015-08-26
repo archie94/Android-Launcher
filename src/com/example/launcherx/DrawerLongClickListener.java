@@ -22,16 +22,18 @@ public class DrawerLongClickListener implements OnItemLongClickListener
 	SlidingDrawer drawerForAdapter;
 	RelativeLayout homeViewForAdapter;
 	Context mContext;
+	MainActivity.Pack packDLCL[];
 	
-	public DrawerLongClickListener(Context c,SlidingDrawer slidingDrawer,RelativeLayout homeView)
+	public DrawerLongClickListener(Context c,SlidingDrawer slidingDrawer,RelativeLayout homeView,MainActivity.Pack pack[])
 	{
 		mContext=c;
 		drawerForAdapter=slidingDrawer;
 		homeViewForAdapter=homeView;
+		packDLCL=pack;
 	}
 
 	@Override
-	public boolean onItemLongClick(AdapterView<?> arg0, View item, int arg2,long arg3) 
+	public boolean onItemLongClick(AdapterView<?> arg0, View item, int pos,long arg3) 
 	{
 		// TODO Auto-generated method stub
 		//in this method we will bring an app to home screen when we long click the app in drawer 
@@ -48,7 +50,16 @@ public class DrawerLongClickListener implements OnItemLongClickListener
 		((ImageView)ll.findViewById(R.id.icon_image)).setImageDrawable(((ImageView)item.findViewById(R.id.icon_image)).getDrawable());
 		((TextView)ll.findViewById(R.id.icon_text)).setText(((TextView)item.findViewById(R.id.icon_text)).getText());
 		
-		ll.setOnTouchListener(new AppTouchListener(item.getWidth()));
+		//ll.setOnTouchListener(new AppTouchListener(item.getWidth()));//when we drag the app in homescreen
+		ll.setOnClickListener(new AppClickListener(mContext,packDLCL));//when we click app in home screen 
+		
+		
+		String data[]=new String[2];
+		data[0]=packDLCL[pos].packageName;
+		data[1]=packDLCL[pos].name;
+		
+		ll.setTag(data);
+		
 		
 		homeViewForAdapter.addView(ll,lp);
 		drawerForAdapter.animateClose();

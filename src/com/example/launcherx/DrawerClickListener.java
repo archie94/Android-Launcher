@@ -1,5 +1,6 @@
 package com.example.launcherx;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,8 +30,12 @@ public class DrawerClickListener implements OnItemClickListener
 	{
 		if(MainActivity.appLaunchable==true)
 		{
-			Intent launchApp=pmDCL.getLaunchIntentForPackage(packDCL[pos].name);/*create intent with the package 
+			//Intent launchApp=pmDCL.getLaunchIntentForPackage(packDCL[pos].name);/*create intent with the package
+			Intent launchApp=new Intent(Intent.ACTION_MAIN);
+			launchApp.addCategory(Intent.CATEGORY_LAUNCHER);//launch app in foreground 
 			//name of the application which is clicked*/
+			ComponentName cp=new ComponentName(packDCL[pos].packageName,packDCL[pos].name);
+			launchApp.setComponent(cp);
 			cDCL.startActivity(launchApp);//launch the application
 		}
 	}
