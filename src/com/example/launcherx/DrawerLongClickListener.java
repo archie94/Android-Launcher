@@ -50,7 +50,7 @@ public class DrawerLongClickListener implements OnItemLongClickListener
 		((ImageView)ll.findViewById(R.id.icon_image)).setImageDrawable(((ImageView)item.findViewById(R.id.icon_image)).getDrawable());
 		((TextView)ll.findViewById(R.id.icon_text)).setText(((TextView)item.findViewById(R.id.icon_text)).getText());
 		
-		//ll.setOnTouchListener(new AppTouchListener(item.getWidth()));//when we drag the app in homescreen
+		ll.setOnTouchListener(new AppTouchListener(item.getWidth()));//when we drag the app in homescreen
 		ll.setOnClickListener(new AppClickListener(mContext,packDLCL));//when we click app in home screen 
 		
 		

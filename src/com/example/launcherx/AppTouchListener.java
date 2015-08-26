@@ -31,7 +31,7 @@ public class AppTouchListener implements OnTouchListener
 			v.setLayoutParams(lp);
 			//break;
 		}
-		return true;
+		return false;//so that both drag and click functionality works 
 	}
 
 }
