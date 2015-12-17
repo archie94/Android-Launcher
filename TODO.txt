@@ -1,2 +1,3 @@
 List of TODO 
 - Horizontal scrolling of app drawer
+- Add a "thumb drawer"
